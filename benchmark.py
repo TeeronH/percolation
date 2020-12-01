@@ -8,6 +8,7 @@ from util import Vertex
 from util import Edge
 from util import Graph
 from percolator import PercolationPlayer
+from funnypercolator import FunnyPercolationPlayer
 
 # Removes the given vertex v from the graph, as well as the edges attached to it.
 # Removes all isolated vertices from the graph as well.
@@ -124,7 +125,7 @@ class RandomPlayer:
 if __name__ == "__main__":
 	# NOTE: we are not creating INSTANCES of these classes, we're defining the players
 	# as the class itself. This lets us call the static methods.
-	p1 = PercolationPlayer
+	p1 = FunnyPercolationPlayer
 	# Comment the above line and uncomment the next two if
 	# you'd like to test the PercolationPlayer code in this repo.
 	# from percolator import PercolationPlayer
