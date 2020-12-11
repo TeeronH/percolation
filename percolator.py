@@ -22,7 +22,7 @@ class PercolationPlayer:
 	def ChooseVertexToColor(graph, player):
 		
 
-		'''
+		
 		max_count = 0
 		max_vertex = next(iter(graph.V))
 
@@ -31,11 +31,15 @@ class PercolationPlayer:
 				max_count = PercolationPlayer.FindNeighbors(graph, player, v)
 				max_vertex = v
 
-		return max_vertex
-		'''
+		
+		#CHANGE DIS
+		for v in [v for v in graph.V if v.color == -1]:
+			if v != max_vertex:
+				return v
+
 
 		
-		
+		'''
 		degrees={vertex: 0 for vertex in graph.V}
 		for edge in graph.E:
 			degrees[edge.a] +=1
@@ -46,7 +50,7 @@ class PercolationPlayer:
 			max_key = max(degrees, key=degrees.get)
 		
 		return max_key
-		
+		'''
 		
 		
 
@@ -67,48 +71,6 @@ class PercolationPlayer:
 				if count > 6:
 					return v
 		
-		
-		'''
-		status = False
-		vertex = 1
-		i = 5
-		count = 0
-		while status == False or i > 0:
-			for v in graph.V:
-				if v.color == player:
-					for e in graph.IncidentEdges(v):
-						if e.a.color != player or e.b.color !=player:
-							count = count + 1
-					if count > i:
-						status = True 
-						vertex = v
-			i = i - 1
-			count = count + 1
-
-		if status == True:
-			return v 
-
-		status = False
-		vertex = 1
-		i = 2
-		count = 0
-		while status == False or i < 6:
-			for v in graph.V:
-				if v.color == player:
-					for e in graph.IncidentEdges(v):
-						if e.a.color != player or e.b.color !=player:
-							count = count + 1
-					if count < i:
-						status = True 
-						vertex = v
-			i = i + 1
-			count = count +1
-
-		if status == True:
-			return v 
-
-		'''
-		
 		count = 0
 		for v in graph.V:
 			if v.color == player:
@@ -117,6 +79,7 @@ class PercolationPlayer:
 						count = count + 1
 				if count > 5:
 					return v
+
 		count = 0
 		for v in graph.V:
 			if v.color == player:
@@ -143,6 +106,7 @@ class PercolationPlayer:
 						count = count + 1
 				if count > 2:
 					return v
+
 		count = 0
 		for v in graph.V:
 			if v.color == player:
@@ -151,7 +115,6 @@ class PercolationPlayer:
 						count = count + 1
 				if count > 1:
 					return v
-
 		
 		for v in graph.V:
 			if v.color == player:
