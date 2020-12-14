@@ -22,7 +22,7 @@ class PercolationPlayer:
 	def ChooseVertexToColor(graph, player):
 		
 
-		
+		'''
 		max_count = 0
 		max_vertex = next(iter(graph.V))
 
@@ -32,14 +32,21 @@ class PercolationPlayer:
 				max_vertex = v
 
 		
-		#CHANGE DIS
-		for v in [v for v in graph.V if v.color == -1]:
-			if v != max_vertex:
-				return v
+		return max_vertex
+		'''
+
+		for v in graph.V:
+			if v == -1:
+				count = FindNeighbors(graph, player, v)
+				if count < 4:
+					return v
+				if count < 3:
+					return v
+
 
 
 		
-		'''
+		
 		degrees={vertex: 0 for vertex in graph.V}
 		for edge in graph.E:
 			degrees[edge.a] +=1
@@ -48,9 +55,11 @@ class PercolationPlayer:
 		while max_key.color != -1:
 			degrees.pop(max_key)
 			max_key = max(degrees, key=degrees.get)
+
+
 		
 		return max_key
-		'''
+		
 		
 		
 
@@ -62,6 +71,19 @@ class PercolationPlayer:
 	# Should return a vertex `v` from graph.V where v.color == player
 	def ChooseVertexToRemove(graph, player):
 		
+
+
+
+		count = 0
+		for v in graph.V:
+			if v.color == player:
+				for e in PercolationPlayer.IncidentEdges(graph, v):
+					if e.a.color != player or e.b.color !=player:
+						count = count + 1
+				if count > 7:
+					return v
+		
+
 		count = 0
 		for v in graph.V:
 			if v.color == player:
@@ -167,9 +189,10 @@ class PercolationPlayer:
 						count = count + 1
 				if count < 6:
 					return v
-		
 
-		
+	
+
+
 		
 		
 		return random.choice([v for v in graph.V if v.color == player])
