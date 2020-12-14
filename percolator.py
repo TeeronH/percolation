@@ -1,5 +1,6 @@
 
 import random
+import heapq
 
 class PercolationPlayer:
 		
@@ -17,6 +18,19 @@ class PercolationPlayer:
 				count = count + 1
 		return count
 		
+	def getEdges(graph):
+		eList = {vertex : set() for vertex in graph.V}
+		for edge in graph.E:
+			eList[edge.a].add(edge)
+			eList[edge.b].add(edge)
+		return eList
+
+	def getNeighbors(graph):
+		nList = {vertex : set() for vertex in graph.V}
+		for edge in graph.E:
+			nList[edge.a].add(edge.b)
+			nList[edge.b].add(edge.a)
+		return nList
 	
 
 	# `graph` is an instance of a Graph, `player` is an integer (0 or 1).
@@ -34,8 +48,8 @@ class PercolationPlayer:
 
 		
 		return max_vertex
-		'''
-		'''
+		
+		
 		for v in graph.V:
 			if v == -1:
 				count = FindNeighbors(graph, player, v)
@@ -44,10 +58,26 @@ class PercolationPlayer:
 				if count < 3:
 					return v
 		'''
+		
 
-
+		vertexHeap = []
+		nList = PercolationPlayer.getNeighbors(graph)
+		count = 0
+		vertexList = graph.V
+		for vertex in vertexList:
+			if vertex.color == -1:
+				heur = 0
+				for neighbor in nList[vertex]:
+					heur -= 30
+					if neighbor.color == player: heur += 5
+					if len(nList[neighbor]) == 1: heur -= 1
+					if neighbor.color == 1 - player: heur += len(nList[neighbor])
+				heapq.heappush(vertexHeap, (heur, count, vertex))
+				count += 1
+		if vertexHeap: return heapq.heappop(vertexHeap)[2]
 
 		
+		'''
 		
 		degrees={vertex: 0 for vertex in graph.V}
 		for edge in graph.E:
@@ -63,14 +93,14 @@ class PercolationPlayer:
 		return max_key
 		
 		
-		
+		'''
 
 	# `graph` is an instance of a Graph, `player` is an integer (0 or 1).
 	# Should return a vertex `v` from graph.V where v.color == player
 	def ChooseVertexToRemove(graph, player):
 		
 
-
+	
 
 		count = 0
 		for v in graph.V:
@@ -195,6 +225,7 @@ class PercolationPlayer:
 						count = count + 1
 				if count < 7:
 					return v
+		
 	
 
 
