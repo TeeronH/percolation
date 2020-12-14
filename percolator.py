@@ -1,6 +1,8 @@
+
 import random
 
 class PercolationPlayer:
+		
 	
 	def IncidentEdges(graph, vertex):
 		return [e for e in graph.E if (e.a == vertex or e.b == vertex)]
@@ -21,7 +23,6 @@ class PercolationPlayer:
 	# Should return a vertex `v` from graph.V where v.color == -1
 	def ChooseVertexToColor(graph, player):
 		
-
 		'''
 		max_count = 0
 		max_vertex = next(iter(graph.V))
@@ -34,7 +35,7 @@ class PercolationPlayer:
 		
 		return max_vertex
 		'''
-
+		'''
 		for v in graph.V:
 			if v == -1:
 				count = FindNeighbors(graph, player, v)
@@ -42,6 +43,7 @@ class PercolationPlayer:
 					return v
 				if count < 3:
 					return v
+		'''
 
 
 
@@ -62,10 +64,6 @@ class PercolationPlayer:
 		
 		
 		
-
-
-			
-
 
 	# `graph` is an instance of a Graph, `player` is an integer (0 or 1).
 	# Should return a vertex `v` from graph.V where v.color == player
@@ -189,13 +187,21 @@ class PercolationPlayer:
 						count = count + 1
 				if count < 6:
 					return v
-
+		count = 0
+		for v in graph.V:
+			if v.color == player:
+				for e in PercolationPlayer.IncidentEdges(graph, v):
+					if e.a.color == player or e.b.color ==player:
+						count = count + 1
+				if count < 7:
+					return v
 	
 
 
 		
 		
 		return random.choice([v for v in graph.V if v.color == player])
+		
 		
 
 
