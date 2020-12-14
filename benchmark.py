@@ -1,6 +1,3 @@
-
-
-
 import random
 import itertools
 import copy
@@ -13,7 +10,6 @@ import errno
 
 from util import *
 from percolator import PercolationPlayer
-from funnypercolator import FunnyPercolationPlayer
 
 
 # Removes the given vertex v from the graph, as well as the edges attached to it.
