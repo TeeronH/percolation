@@ -48,8 +48,6 @@ class PercolationPlayer:
 		
 	
 		
-		
-		
 		degrees={vertex: 0 for vertex in graph.V}
 		for edge in graph.E:
 			degrees[edge.a] +=1
