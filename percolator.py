@@ -38,12 +38,15 @@ class PercolationPlayer:
 		return max_vertex
 		
 		'''
+
 		for v in graph.V:
 			if v == -1:
-				count = FindNeighbors(graph, player, v)
-				
+				count = PercolationPlayer.FindNeighbors(graph, player, v)
 				if count < 3:
 					return v
+
+		
+	
 		
 		
 		
@@ -58,7 +61,8 @@ class PercolationPlayer:
 
 		
 		return max_key
-
+		
+		
 		
 
 
@@ -70,7 +74,7 @@ class PercolationPlayer:
 	# Should return a vertex `v` from graph.V where v.color == player
 	def ChooseVertexToRemove(graph, player):
 		
-
+		
 
 		count = 0
 		for v in graph.V:
@@ -204,6 +208,7 @@ class PercolationPlayer:
 		
 		
 		return random.choice([v for v in graph.V if v.color == player])
+		
 		
 		
 		
