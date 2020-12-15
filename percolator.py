@@ -38,12 +38,13 @@ class PercolationPlayer:
 		return max_vertex
 		
 		'''
-
+		'''
 		for v in graph.V:
 			if v == -1:
 				count = PercolationPlayer.FindNeighbors(graph, player, v)
 				if count < 3:
 					return v
+		'''
 
 		
 	
